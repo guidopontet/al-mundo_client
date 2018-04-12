@@ -1,0 +1,69 @@
+/* ----- ----- GENERALES ----- ----- */
+.star{
+    fill: #ffbb00;
+    width: 20px;
+}
+
+.btn-hotel{
+    background: #002A79;
+    color: white;
+    font-weight: 600;
+    width: 90%;
+
+}
+
+.name_filter,
+.stars_filter{
+    text-decoration: none;
+}
+
+/* Ocultamos el borde en dispositivos medianos y pequeños (GRID BOOTSTRAP) */
+@media(min-width:767px){
+    .border-left-hotel{
+        border-left: 1px dashed #dee2e6 !important;
+    }
+}
+
+@media(max-width:767px){
+    .border-left-hotel{
+        border-top: 1px dashed #dee2e6 !important;
+    }
+}
+
+
+/* ----- ----- CARD BODY ----- ----- */
+
+.card-body .find,
+.card-body h6{
+    color: #0679B3;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.img-fluid{
+    max-height: 200px !important;
+}
+
+.card-body p{
+    line-height: 1 !important;
+}
+
+.card-body small{
+    font-weight: 600;
+}
+
+.card-body .precio{
+    color: #e16800 !important;
+    font-weight: lighter;
+}
+
+.card-body .precio .precio_numero{
+    font-size: 1.2em;
+    font-weight: bold
+}
+
+
+
+
+
+

@@ -1,0 +1,157 @@
+<div class="container-fluid my-3">
+    <div class="row">
+            
+        <!-- FILTROS -->
+        <div class="col-md-4">
+
+            <!-- TITULO -->
+            <div class="card my-2">
+                <a class="filters" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters">
+                    <div class="card-body">
+                        <h6 class="text-dark d-inline-block">Filtros</h6>
+                        <span class="dropdown-toggle float-right"></span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="collapse" id="filters">
+                <!-- FILTRO POR NOMBRE -->
+                <div class="card">
+                    <a class="name_filter" data-toggle="collapse" href="#name_filter" aria-expanded="false" aria-controls="name_filter">
+                        <div class=" my-2">
+                            <div class="card-body">
+                                <div class="find">
+                                    <img src="assets/images/filters/search.svg" style="height: 1em" alt="">
+                                     Nombre del Hotel
+                                    <span class="dropdown-toggle float-right"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+        
+                    <div class="collapse" id="name_filter">
+                        <div class="card-body pt-0">
+                            <div class="form-row">
+                                <div class="col">
+                                    <input (keyup)="getHotels()" [(ngModel)]="filter_string" class="form-control" type="text" placeholder="Ingrese el nombre del hotel">
+                                </div>
+                                <button class="btn btn-danger" (click)="this.filter_string=''; getHotels()">Limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- FILTRO POR ESTRELLAS -->
+                <div class="card my-2">
+                    <a class="stars_filter" data-toggle="collapse" href="#stars_filter" aria-expanded="false" aria-controls="stars_filter">
+                        <div class=" my-2">
+                            <div class="card-body">
+                                <div class="find">
+                                    <img src="assets/images/filters/star_blue.svg" style="height: 1em" alt=""> Estrellas
+                                    <span class="dropdown-toggle float-right"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <div class="collapse" id="stars_filter">
+                        <div class="card-body pt-0">
+                            <div class="form-check my-2">
+                                <input  (click)="filter_stars=''; getHotels()" [(ngModel)]="filter_stars" class="form-check-input" type="radio" name="stars" id="all_stars" value="" checked>
+                                <label class="form-check-label" for="all_stars">
+                                    Todas las Estrellas
+                                </label>
+                            </div>
+                            <div class="form-check my-2">
+                                <input  [(ngModel)]="filter_stars" class="form-check-input" type="radio" name="stars" id="5_stars" value="5">
+                                <label class="form-check-label" for="5_stars">
+                                    <img *ngFor="let stars of this.makeIterable(5)" src="assets/images/filters/star.svg" alt="estrella" class="star">
+                                </label>
+                            </div>
+                            <div class="form-check my-2">
+                                <input   [(ngModel)]="filter_stars" class="form-check-input" type="radio" name="stars" id="4_stars" value="4">
+                                <label class="form-check-label" for="4_stars">
+                                    <img *ngFor="let stars of this.makeIterable(4)" src="assets/images/filters/star.svg" alt="estrella" class="star">
+                                </label>
+                            </div>
+                            <div class="form-check my-2">
+                                <input  [(ngModel)]="filter_stars" class="form-check-input" type="radio"name="stars" id="3_stars" value="3">
+                                <label class="form-check-label" for="3_stars">
+                                    <img *ngFor="let stars of this.makeIterable(3)" src="assets/images/filters/star.svg" alt="estrella" class="star">
+                                </label>
+                            </div>
+                            <div class="form-check my-2">
+                                <input  [(ngModel)]="filter_stars" class="form-check-input" type="radio"name="stars" id="2_stars" value="2">
+                                <label class="form-check-label" for="2_stars">
+                                    <img *ngFor="let stars of this.makeIterable(2)" src="assets/images/filters/star.svg" alt="estrella" class="star">
+                                </label>
+                            </div>
+                            <div class="form-check my-2">
+                                <input  [(ngModel)]="filter_stars" class="form-check-input" type="radio" name="stars" id="1_stars" value="1">
+                                <label class="form-check-label" for="1_stars">
+                                    <img *ngFor="let stars of this.makeIterable(1)" src="assets/images/filters/star.svg" alt="estrella" class="star">
+                                </label>
+                                <button class="btn btn-success float-right" (click)="getHotels()">Filtrar</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="filter_string!='' || filter_stars!=''" class="mt-2 text-muted d-inline-block float-right">{{hotels.length}} resultados</div>
+        </div>
+
+        <!-- LISTA HOTELES -->
+        <div class="col-md-8 ">
+
+            <!-- NO RESULTADOS -->
+            <h1 *ngIf="hotels && hotels.length==0" class="text-muted text-center mt-5 animated jello">No hay resultados</h1>
+            
+            <div *ngFor="let hotel of hotels">
+                <div class="card my-2 animated fadeIn">
+                    <div class="card-body">
+                        <div class="row">
+    
+                            <!-- IMAGEN -->
+                            <div class="col-md-4 col-lg-4 text-center p-2">
+                                <img *ngIf="hotel.image!=''" src="{{url+'images/'+ hotel.image}}" class="img-fluid" alt="{{hotel.name}}">
+                                <!-- Si no tiene imagen muestro una por defecto -->
+                                <img *ngIf="hotel.image==''" src="{{url+'images/'+ 'noImage.png'}}" class="img-fluid" alt="Card image cap">
+                            </div>
+    
+                            <!-- DATA HOTEL -->
+                            <div class="col-md-4 col-lg-5 mt-1 mt-md-0">
+                                <h6>{{hotel.name}}</h6>
+    
+                                <!-- ESTRELLAS -->
+                                <div>
+                                    <img *ngFor="let stars of this.makeIterable(hotel.stars)" src="assets/images/filters/star.svg" alt="estrella" class="star">
+                                </div>
+    
+                                <!-- AMENITIES -->
+                                <div class="my-3">
+                                    <img *ngFor="let amenitie of hotel.amenities" src="assets/images/amenities/{{amenitie}}.svg" alt="amenitie" [title]="amenitie" class="star mr-1">
+                                </div>
+                            </div>
+                            
+                            <!-- PRECIO -->
+                            <div class="col-md-4 col-lg-3 border-left-hotel text-center mt-sm-4">
+                                <p class="text-muted precioHab mt-3 mt-md-0"><small>Precio por noche por habitación</small></p>
+                                
+                                <div class="precio">
+                                    <h4>ARS<span class="precio_numero ml-1 d-inline-block">{{hotel.price}}</span></h4> 
+                                </div>
+    
+                                <button class="btn btn-hotel mt-2">Ver Hotel</button>
+    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
