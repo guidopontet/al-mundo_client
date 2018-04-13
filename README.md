@@ -1,7 +1,13 @@
 # Instalar dependencias del proyecto
-  Ejecutar `npm update` en el directorio
+  Ejecutar `npm install` en el directorio
   
+# Servir
+  Ejecutar `npm start`
   
+# Abrir en navegador
+  Ya se encuentra corriendo en el puerto 4200 y haciendo peticiones a la API (Para filtrar y recuperar hoteles)
+  
+# ***********************************************
 # Client
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
